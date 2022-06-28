@@ -8,11 +8,11 @@ class SliderController extends Controller
 {
     public function addSlider(){
 
-        return view('admin.addSlider');
+        return view('admin.slider.addSlider');
     }
 
     public function sliders(){
 
-        return view('admin.sliders');
+        return view('admin.slider.sliders');
     }
 }

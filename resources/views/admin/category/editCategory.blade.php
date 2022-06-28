@@ -1,6 +1,6 @@
 @extends('admin_layouts.admin')
 
-@section('title','Add Category')
+@section('title','Edit Category')
 
 @section('content')
 
@@ -17,7 +17,7 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Home</a></li>
                         <li class="breadcrumb-item active">Category</li>
                     </ol>
                 </div>
@@ -34,23 +34,47 @@
             <!-- jquery validation -->
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Add category</small></h3>
+                            <h3 class="card-title">Edit category</small></h3>
                         </div>
+
+                        @if (Session::has('status'))
+                        <div class="alert alert-success">
+                            {{Session::get('status')}}
+                        </div>
+                        @endif
+
+                        @if (count($errors)>0)
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{$error}}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
             <!-- /.card-header -->
             <!-- form start -->
-                        <form>
+                        {{-- <form> --}}
+                        {!!Form::open(['action' =>['CategoryController@updateCategory',$category->id] , 'method' => 'POST' ]) !!}
+                        {{ csrf_field() }}
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Category name</label>
-                                    <input type="text" name="category_name" class="form-control" id="exampleInputEmail1" placeholder="Enter category">
+                                    {!! Form::hidden('id', $category->id) !!}
+                                    {{--<label for="exampleInputEmail1">Category name</label>--}}
+                                    {!! Form::label('', 'Category name', ['for' => 'exampleInputEmail1']) !!}
+                                    {!! Form::text('category_name', $category->category_name , ['class' => 'form-control' , 'id' => 'exampleInputEmail1' , 'placeholder' => 'Enter category']) !!}
+                                    {{--<input type="text" name="category_name" class="form-control" id="exampleInputEmail1" placeholder="Enter category">--}}
                                 </div>
                             </div>
                 <!-- /.card-body -->
                             <div class="card-footer">
                 <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
-                                <input type="submit" class="btn btn-primary" value="Save" >
+                            {!! Form::submit('Update', ['class'=> 'btn btn-primary']) !!}
+                                {{--<input type="submit" class="btn btn-primary" value="Save" >--}}
                             </div>
-                        </form>
+                        {!! Form::close() !!}
+
+                        {{-- </form> --}}
                     </div>
             <!-- /.card -->
                 </div>
@@ -76,10 +100,10 @@
 @section('scripts')
 
 <!-- jquery-validation -->
-<script src="backend/plugins/jquery-validation/jquery.validate.min.js"></script>
-<script src="backend/plugins/jquery-validation/additional-methods.min.js"></script>
+<script src="{{asset('backend/plugins/jquery-validation/jquery.validate.min.js')}}"></script>
+<script src="{{asset('backend/plugins/jquery-validation/additional-methods.min.js')}}"></script>
 <!-- AdminLTE App -->
-<script src="backend/dist/js/adminlte.min.js"></script>
+<script src="{{asset('backend/dist/js/adminlte.min.js')}}"></script>
 
 <script>
     $(function () {
@@ -127,5 +151,5 @@
         });
     });
 </script>
-    
+
 @endsection
