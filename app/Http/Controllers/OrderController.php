@@ -7,6 +7,6 @@ use Illuminate\Http\Request;
 class OrderController extends Controller
 {
     public function orders(){
-        return view('admin.orders');
+        return view('admin.order.orders');
     }
 }

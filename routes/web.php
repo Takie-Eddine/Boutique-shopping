@@ -14,34 +14,51 @@ use Illuminate\Support\Facades\Route;
 |
 */
 //----------------Admin--------------------\\
-Route::get('/admin','AdminController@admin');
+Route::get('/admin','AdminController@admin')->name('admin.dashboard');
 
-Route::get('/addcategory','CategoryController@addCategory');
-Route::get('/categories','CategoryController@categories');
 
-Route::get('/addslider','SliderController@addSlider');
-Route::get('/sliders','SliderController@sliders');
+//----------------Category--------------------\\
+Route::get('/addcategory','CategoryController@addCategory')->name('admin.category.addcategory');
+Route::post('/savecategory','CategoryController@saveCategory')->name('admin.category.savecategory');
+Route::get('/editcategory/{id}','CategoryController@editCategory')->name('admin.category.editcategory');
+Route::post('/updatecategory/{id}','CategoryController@updateCategory')->name('admin.category.updatecategory');
+Route::get('/deletecategory/{id}','CategoryController@deleteCategory')->name('admin.category.deletecategory');
+Route::get('/categories','CategoryController@categories')->name('admin.category.categories');
 
-Route::get('/addproduct','ProductController@addProduct');
-Route::get('/products','ProductController@products');
 
-Route::get('/orders','OrderController@orders');
+//----------------Sub-Category--------------------\\
+Route::get('/addsubcategory','SubCategoryController@addSubCategory')->name('admin.subcategory.addsubcategory');
+Route::post('/savesubcategory','SubCategoryController@saveSubCategory')->name('admin.subcategory.savesubcategory');
+Route::get('/editsubcategory/{id}','SubCategoryController@editSubCategory')->name('admin.subcategory.editsubcategory');
+Route::post('/updatesubcategory/{id}','SubCategoryController@updateSubCategory')->name('admin.subcategory.updatesubcategory');
+Route::get('/deletesubcategory/{id}','SubCategoryController@deleteSubCategory')->name('admin.subcategory.deletesubcategory');
+Route::get('/subcategories','SubCategoryController@subcategories')->name('admin.subcategory.subcategories');
+
+
+
+Route::get('/addslider','SliderController@addSlider')->name('admin.slider.addslider');
+Route::get('/sliders','SliderController@sliders')->name('admin.slider.sliders');
+
+Route::get('/addproduct','ProductController@addProduct')->name('admin.product.addproduct');
+Route::get('/products','ProductController@products')->name('admin.product.products');
+
+Route::get('/orders','OrderController@orders')->name('admin.order.orders');
 
 
 
 
 //----------------Client --------------------\\
-Route::get('/','ClientController@home');
+Route::get('/','ClientController@home')->name('');
 
-Route::get('/shop','ClientController@shop');
+Route::get('/shop','ClientController@shop')->name('');
 
-Route::get('/cart','ClientController@cart');
+Route::get('/cart','ClientController@cart')->name('');
 
-Route::get('/checkout','ClientController@checkout');
+Route::get('/checkout','ClientController@checkout')->name('');
 
-Route::get('/login','ClientController@login');
+Route::get('/login','ClientController@login')->name('');
 
-Route::get('/signup','ClientController@signup');
+Route::get('/signup','ClientController@signup')->name('');
 
 
 
