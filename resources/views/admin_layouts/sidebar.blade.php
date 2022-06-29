@@ -68,8 +68,8 @@
             </ul>
           </li>
 
-          <li class="nav-item has-treeview {{request()->is('subcategories') ? 'menu-open' :'' }} {{request()->is('addsubcategory') ? 'menu-open' :'' }} {{request()->is('editcategory/*') ? 'menu-open' :'' }}">
-            <a href="#" class="nav-link {{request()->is('subcategories') ? 'active' :'' }} {{request()->is('addsubcategory') ? 'active' :'' }} {{request()->is('editcategory/*') ? 'active' :'' }}">
+          <li class="nav-item has-treeview {{request()->is('subcategories') ? 'menu-open' :'' }} {{request()->is('addsubcategory') ? 'menu-open' :'' }} {{request()->is('editsubcategory/*') ? 'menu-open' :'' }}">
+            <a href="#" class="nav-link {{request()->is('subcategories') ? 'active' :'' }} {{request()->is('addsubcategory') ? 'active' :'' }} {{request()->is('editsubcategory/*') ? 'active' :'' }}">
               <i class="nav-icon fas fa-folder"></i>
               <p>
                 Subcategories
@@ -120,8 +120,8 @@
             </ul>
           </li>
 
-          <li class="nav-item has-treeview {{request()->is('products') ? 'menu-open' :'' }} {{request()->is('addproduct') ? 'menu-open' :'' }}">
-            <a href="#" class="nav-link {{request()->is('products') ? 'active' :'' }} {{request()->is('addproduct') ? 'active' :'' }}">
+          <li class="nav-item has-treeview {{request()->is('products') ? 'menu-open' :'' }} {{request()->is('addproduct') ? 'menu-open' :'' }} {{request()->is('editproduct/*') ? 'menu-open' :'' }}">
+            <a href="#" class="nav-link {{request()->is('products') ? 'active' :'' }} {{request()->is('addproduct') ? 'active' :'' }} {{request()->is('editproduct/*') ? 'active' :'' }}">
               <i class="nav-icon fas fa-folder"></i>
               <p>
                 Products

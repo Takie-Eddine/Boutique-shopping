@@ -62,7 +62,7 @@
                                     {{--<label for="exampleInputEmail1">Category name</label>--}}
                                     {!! Form::label('', 'Category name', ['for' => 'exampleInputEmail1']) !!}
                                         <select name="parent_id" class="select2 form-control">
-                                            <optgroup label="من فضلك أختر القسم ">
+                                            <optgroup label="Select category ">
                                                 @if($categories && $categories -> count() > 0)
                                                     @foreach($categories as $category)
                                                         <option value="{{$category -> id }}">{{$category-> category_name}}</option>

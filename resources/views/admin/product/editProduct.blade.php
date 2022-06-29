@@ -1,6 +1,6 @@
 @extends('admin_layouts.admin')
 
-@section('title','Add Product')
+@section('title','Edit Product')
 
 
 @section('content')
@@ -31,7 +31,7 @@
                 <!-- jquery validation -->
                     <div class="card card-success">
                         <div class="card-header">
-                            <h3 class="card-title">Add product</h3>
+                            <h3 class="card-title">Edit product</h3>
                         </div>
                         @if (Session::has('status'))
                         <div class="alert alert-success">
@@ -51,52 +51,52 @@
                         <!-- /.card-header -->
                         <!-- form start -->
                         {{--<form id="quickForm"> --}}
-                        {!!Form::open(['action' =>'ProductController@saveProduct' , 'method' => 'POST', 'enctype'=>"multipart/form-data" ]) !!}
+                        {!!Form::open(['action' =>['ProductController@updateProduct',$product->id] , 'method' => 'POST', 'enctype'=>"multipart/form-data" ]) !!}
                         {{ csrf_field() }}
                             <div class="card-body">
                                 <div class="form-group">
                                     {!! Form::label('', 'Product name', ['for' => 'exampleInputEmail1']) !!}
-                                    {!! Form::text('product_name', '' , ['class' => 'form-control' , 'id' => 'exampleInputEmail1' , 'placeholder' => 'Enter product']) !!}
+                                    {!! Form::text('product_name', $product->product_name , ['class' => 'form-control' , 'id' => 'exampleInputEmail1' , 'placeholder' => 'Enter product']) !!}
                                     {{-- <label for="exampleInputEmail1">Product name</label>
                                     <input type="text" name="product_name" class="form-control" id="exampleInputEmail1" placeholder="Enter product name"> --}}
                                 </div>
                                 <div class="form-group">
                                     {!! Form::label('', 'Product price', ['for' => 'exampleInputEmail1']) !!}
-                                    {!! Form::number('product_price', '' , ['class' => 'form-control' , 'id' => 'exampleInputEmail1' , 'placeholder' => 'Enter product price']) !!}
+                                    {!! Form::number('product_price', $product->product_price , ['class' => 'form-control' , 'id' => 'exampleInputEmail1' , 'placeholder' => 'Enter product price']) !!}
                                     {{-- <label for="exampleInputEmail1">Product price</label>
                                     <input type="number" name="product_price" class="form-control" id="exampleInputEmail1" placeholder="Enter product price" min="1"> --}}
                                 </div>
                                 <div class="form-group">
                                     {!! Form::label('', 'Product qty', ['for' => 'exampleInputEmail1']) !!}
-                                    {!! Form::number('qty', '' , ['class' => 'form-control' , 'id' => 'exampleInputEmail1' , 'placeholder' => 'Enter product qty']) !!}
+                                    {!! Form::number('qty', $product->qty , ['class' => 'form-control' , 'id' => 'exampleInputEmail1' , 'placeholder' => 'Enter product qty']) !!}
                                     {{-- <label for="exampleInputEmail1">Product price</label>
                                     <input type="number" name="product_price" class="form-control" id="exampleInputEmail1" placeholder="Enter product price" min="1"> --}}
                                 </div>
                                 <div class="form-group">
                                     {{-- {!! Form::select('product_category', $categories, null, ['placeholder' => 'Select category' , 'class' => 'form-control select2']) !!} --}}
-                                    <label>Product category</label>
+                                    {{-- <label>Product category</label>
                                     <select class="form-control select2" name="categories[]">
                                         <optgroup label=" Select subcategory ">
                                         @foreach ($categories as $category)
 
-                                            <option  value="{{ $category->id }}"> {{$category->category_name}} </option>
+                                            <option  value="{{ $category->id }}"  @if($category -> id == $product->categories[0]->id )  selected @endif> {{$category->category_name}} </option>
 
                                             @endforeach
 
-                                    </select>
+                                    </select> --}}
                                 </div>
                                 <div class="form-group">
                                     {{-- {!! Form::select('product_subcategory', $subcategories, null, ['placeholder' => 'Select subcategory' , 'class' => 'form-control select2']) !!} --}}
-                                    <label>Product subcategory</label>
+                                    {{-- <label>Product subcategory</label>
                                     <select class="form-control select2" name="subcategories[]">
                                         <optgroup label=" Select subcategory ">
                                         @foreach ($subcategories as $category)
 
-                                            <option  value="{{ $category->id }}"> {{$category->category_name}} </option>
+                                            <option  value="{{ $category->id }}" @if($category -> id == $product->categories[1]->id )  selected @endif> {{$category->category_name}} </option>
 
                                             @endforeach
 
-                                    </select>
+                                    </select> --}}
                                     {{-- <label>Product category</label>
                                     <select class="form-control select2" style="width: 100%;">
                                         <option selected="selected">Fruit</option>
@@ -109,7 +109,7 @@
                                     {!! Form::label('', 'Product color', ['for' => 'exampleInputEmail1']) !!} <br>
 
                                     @foreach ($colors as $color)
-                                        <label  class="checkbox-inline" id="exampleInputEmail1" ><input class="chk-box" type="checkbox" name="color[]" id="" value="{{ $color->color_name }}">{{ $color->color_name }}</label>
+                                        <label  class="checkbox-inline" id="exampleInputEmail1" ><input class="chk-box" type="checkbox" name="color[]" id="" value="{{ $color->color_name }}" @if (((json_decode( $product['product_color']))) ) {{in_array($color->color_name , json_decode( $product['product_color']))? 'checked' :'' }} @endif> {{ $color->color_name }}</label>
                                     @endforeach
                                     {{-- <label for="exampleInputEmail1">Product price</label>
                                     <input type="number" name="product_price" class="form-control" id="exampleInputEmail1" placeholder="Enter product price" min="1"> --}}
@@ -119,7 +119,7 @@
                                     <div class="form-group col-sm-2">
                                         {!! Form::label('', 'Product size', ['for' => 'exampleInputEmail1']) !!} <br>
                                         @foreach ($sizes as $size)
-                                            <label  class="checkbox-inline" id="exampleInputEmail1"><input class="chk-box" type="checkbox" name="size[]" id="" value="{{ $size->size_name }}">{{ $size->size_name }}</label>
+                                            <label  class="checkbox-inline" id="exampleInputEmail1"><input class="chk-box" type="checkbox" name="size[]" id="" value="{{ $size->size_name }} " @if (((json_decode( $product['product_size']))) )  {{in_array($size->size_name , json_decode( $product['product_size']))? 'checked' :'' }} @endif >{{ $size->size_name }}</label>
                                         @endforeach
                                     </div>
 
@@ -142,7 +142,7 @@
                             <!-- /.card-body -->
                             <div class="card-footer">
                             <!-- <button type="submit" class="btn btn-success">Submit</button> -->
-                                {!! Form::submit('Save', ['class'=> 'btn btn-success']) !!}
+                                {!! Form::submit('Update', ['class'=> 'btn btn-success']) !!}
                                 {{-- <input type="submit" class="btn btn-success" value="Save"> --}}
                             </div>
                             {!! Form::close() !!}
