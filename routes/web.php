@@ -40,7 +40,11 @@ Route::get('/deletesubcategory/{id}','SubCategoryController@deleteSubCategory')-
 //----------------Slider--------------------\\
 Route::get('/sliders','SliderController@sliders')->name('admin.slider.sliders');
 Route::get('/addslider','SliderController@addSlider')->name('admin.slider.addslider');
-
+Route::post('/saveslider','SliderController@saveSlider')->name('admin.slider.saveslider');
+Route::get('/editslider/{id}','SliderController@editSlider')->name('admin.slider.editslider');
+Route::post('/updateslider/{id}','SliderController@updateSlider')->name('admin.slider.updateslider');
+Route::get('/deleteslider/{id}','SliderController@deleteSlider')->name('admin.slider.deleteslider');
+Route::get('/activateslider/{id}','SliderController@activateSlider')->name('admin.slider.activateslider');
 
 
 

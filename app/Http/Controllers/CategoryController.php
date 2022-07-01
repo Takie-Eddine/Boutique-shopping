@@ -47,7 +47,7 @@ class CategoryController extends Controller
     public function editCategory($id){
 
         $category = Category::find($id);
-        return view('admin.subcategory.editsubcategory')->with('category',$category);
+        return view('admin.category.editcategory')->with('category',$category);
 
     }
 

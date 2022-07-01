@@ -94,8 +94,8 @@
             </ul>
           </li>
 
-          <li class="nav-item has-treeview {{request()->is('sliders') ? 'menu-open' :'' }} {{request()->is('addslider') ? 'menu-open' :'' }}" >
-            <a href="#" class="nav-link {{request()->is('sliders') ? 'active' :'' }} {{request()->is('addslider') ? 'active' :'' }}">
+          <li class="nav-item has-treeview {{request()->is('sliders') ? 'menu-open' :'' }} {{request()->is('addslider') ? 'menu-open' :'' }} {{request()->is('editslider/*') ? 'menu-open' :'' }}" >
+            <a href="#" class="nav-link {{request()->is('sliders') ? 'active' :'' }} {{request()->is('addslider') ? 'active' :'' }} {{request()->is('editslider/*') ? 'active' :'' }}">
               <i class="nav-icon fas fa-folder"></i>
               <p>
                 Sliders

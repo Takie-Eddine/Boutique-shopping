@@ -1,6 +1,6 @@
 @extends('admin_layouts.admin')
 
-@section('title','Add Slider')
+@section('title','Edit Slider')
 
 @section('content')
 
@@ -34,7 +34,7 @@
             <!-- jquery validation -->
                     <div class="card card-warning">
                         <div class="card-header">
-                            <h3 class="card-title">Add slider</h3>
+                            <h3 class="card-title">Edit slider</h3>
                         </div>
                         @if (Session::has('status'))
                         <div class="alert alert-success">
@@ -53,18 +53,18 @@
                         @endif
                         <!-- /.card-header -->
                         <!-- form start -->
-                        {!!Form::open(['action' =>'SliderController@saveSlider' , 'method' => 'POST', 'enctype'=>"multipart/form-data" ]) !!}
+                        {!!Form::open(['action' =>['SliderController@updateSlider',$slider->id] , 'method' => 'POST', 'enctype'=>"multipart/form-data" ]) !!}
                         {{ csrf_field() }}
                             <div class="card-body">
                                 <div class="form-group">
                                     {!! Form::label('', 'description 1', ['for' => 'exampleInputEmail1']) !!}
-                                    {!! Form::text('description1', '' , ['class' => 'form-control' , 'id' => 'exampleInputEmail1' , 'placeholder' => 'Enter slider description']) !!}
+                                    {!! Form::text('description1', $slider->description1 , ['class' => 'form-control' , 'id' => 'exampleInputEmail1' , 'placeholder' => 'Enter slider description']) !!}
 
                                 </div>
 
                                 <div class="form-group">
                                     {!! Form::label('', 'description 2', ['for' => 'exampleInputEmail1']) !!}
-                                    {!! Form::text('description2', '' , ['class' => 'form-control' , 'id' => 'exampleInputEmail1' , 'placeholder' => 'Enter slider description']) !!}
+                                    {!! Form::text('description2', $slider->description1 , ['class' => 'form-control' , 'id' => 'exampleInputEmail1' , 'placeholder' => 'Enter slider description']) !!}
 
                                 </div>
 
@@ -83,7 +83,7 @@
                             <!-- /.card-body -->
                             <div class="card-footer">
 
-                                {!! Form::submit('Save', ['class'=> 'btn btn-warning']) !!}
+                                {!! Form::submit('Update', ['class'=> 'btn btn-warning']) !!}
 
                             </div>
                         {!! Form::close() !!}
