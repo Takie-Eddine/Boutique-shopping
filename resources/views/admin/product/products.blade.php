@@ -14,6 +14,11 @@
                     <div class="card-header">
                         <h3 class="card-title">All Products</h3>
                     </div>
+                    @if (Session::has('status'))
+                        <div class="alert alert-success">
+                            {{Session::get('status')}}
+                        </div>
+                        @endif
                     <!-- /.card-header -->
                     <div class="card-body">
                         <table id="example1" class="table table-bordered table-striped">
@@ -23,39 +28,35 @@
                                     <th>Picture</th>
                                     <th>Product Name</th>
                                     <th>Product Category</th>
+                                    <th>Product SubCategory</th>
                                     <th>Product Price</th>
+                                    <th>Product Qty</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>
-                                        <img src="backend//dist/img/user2-160x160.jpg" style="height : 50px; width : 50px" class="img-circle elevation-2" alt="User Image">
-                                    </td>
-                                    <td>Win 95+</td>
-                                    <td> 4</td>
-                                    <td>5</td>
-                                    <td>
-                                        <a href="#" class="btn btn-success">Unactivate</a>
-                                        <a href="#" class="btn btn-primary"><i class="nav-icon fas fa-edit"></i></a>
-                                        <a href="#" id="delete" class="btn btn-danger" ><i class="nav-icon fas fa-trash"></i></a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>
-                                        <img src="backend//dist/img/user2-160x160.jpg" style="height : 50px; width : 50px" class="img-circle elevation-2" alt="User Image">
-                                    </td>
-                                    <td>Win 95+</td>
-                                    <td>5</td>
-                                    <td>5</td>
-                                    <td>
-                                        <a href="#" class="btn btn-warning">Activate</a>
-                                        <a href="#" class="btn btn-primary"><i class="nav-icon fas fa-edit"></i></a>
-                                        <a href="#" id="delete" class="btn btn-danger" ><i class="nav-icon fas fa-trash"></i></a>
-                                    </td>
-                                </tr>
+                                @foreach ($products as $product)
+
+                                    <tr>
+                                        <td>{{$product->id}}</td>
+                                        {{-- <td><img src="backend//dist/img/user2-160x160.jpg" style="height : 50px; width : 50px" class="img-circle elevation-2" alt="User Image"></td> --}}
+                                        <td><img src="{{asset('assets/images/products/' .$product->product_image)}}" style="height : 50px; width : 50px" alt="Image" class="img-circle elevation-2"></td>
+                                        <td>{{$product->product_name}}</td>
+                                        <td> {{$product->categories[0]->category_name}}</td>
+                                        <td>{{$product->categories[1]->category_name}}</td>
+                                        <td>{{'$'.$product->product_price}}</td>
+                                        <td>{{$product->qty}}</td>
+                                        <td>
+                                            @if ($product->status == 1)
+                                                <a href="{{route('admin.product.activateproduct',$product->id)}}" class="btn btn-success">Unactivate</a>
+                                            @else
+                                                <a href="{{route('admin.product.activateproduct',$product->id)}}" class="btn btn-warning">Activate</a>
+                                            @endif
+                                            <a href="{{route('admin.product.editproduct',$product->id)}}" class="btn btn-primary"><i class="nav-icon fas fa-edit"></i></a>
+                                            <a href="{{route('admin.product.deleteproduct',$product->id)}}" id="delete" class="btn btn-danger" ><i class="nav-icon fas fa-trash"></i></a>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                             <tfoot>
                                 <tr>
@@ -63,7 +64,9 @@
                                     <th>Picture</th>
                                     <th>Product Name</th>
                                     <th>Product Category</th>
+                                    <th>Product SubCategory</th>
                                     <th>Product Price</th>
+                                    <th>Product Qty</th>
                                     <th>Actions</th>
                                 </tr>
                             </tfoot>

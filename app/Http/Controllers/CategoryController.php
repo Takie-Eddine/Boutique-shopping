@@ -9,6 +9,17 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+
+
+    public function categories(){
+
+        $categories = Category::all()-> whereNull('parent_id');
+        return view('admin.category.categories')->with('categories' , $categories);
+    }
+
+
+
+
     public function addCategory(){
 
         return view('admin.category.addCategory');
@@ -36,7 +47,7 @@ class CategoryController extends Controller
     public function editCategory($id){
 
         $category = Category::find($id);
-        return view('admin.subcategory.editsubcategory')->with('category',$category);
+        return view('admin.category.editcategory')->with('category',$category);
 
     }
 
@@ -82,9 +93,5 @@ class CategoryController extends Controller
         }
     }
 
-    public function categories(){
 
-        $categories = Category::all()-> whereNull('parent_id');
-        return view('admin.category.categories')->with('categories' , $categories);
-    }
 }

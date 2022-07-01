@@ -65,7 +65,7 @@
                                     {!! Form::label('', 'Category name', ['for' => 'exampleInputEmail1']) !!}
 
                                         <select name="parent_id" class="select2 form-control">
-                                            <optgroup label="من فضلك أختر القسم ">
+                                            <optgroup label="Select category ">
                                                 @if($categories && $categories -> count() > 0)
                                                     @foreach($categories as $mainCategory)
                                                         <option value="{{$mainCategory -> id }}"   @if($mainCategory -> id == $category -> parent_id)  selected @endif >{{$mainCategory -> category_name}}</option>

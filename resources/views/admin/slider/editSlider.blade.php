@@ -1,6 +1,6 @@
 @extends('admin_layouts.admin')
 
-@section('title','Add SubCategory')
+@section('title','Edit Slider')
 
 @section('content')
 
@@ -13,12 +13,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Sub Category</h1>
+                    <h1>Slider</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{route('admin.dashboard')}}">Home</a></li>
-                        <li class="breadcrumb-item active">SubCategory</li>
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Slider</li>
                     </ol>
                 </div>
             </div>
@@ -29,14 +29,13 @@
     <section class="content">
         <div class="container-fluid">
             <div class="row">
-        <!-- left column -->
+            <!-- left column -->
                 <div class="col-md-12">
             <!-- jquery validation -->
-                    <div class="card card-primary">
+                    <div class="card card-warning">
                         <div class="card-header">
-                            <h3 class="card-title">Add subcategory</small></h3>
+                            <h3 class="card-title">Edit slider</h3>
                         </div>
-
                         @if (Session::has('status'))
                         <div class="alert alert-success">
                             {{Session::get('status')}}
@@ -52,67 +51,62 @@
                             </ul>
                         </div>
                         @endif
-            <!-- /.card-header -->
-            <!-- form start -->
-                        {{-- <form> --}}
-                        {!!Form::open(['action' =>'SubCategoryController@saveSubCategory' , 'method' => 'POST' ]) !!}
+                        <!-- /.card-header -->
+                        <!-- form start -->
+                        {!!Form::open(['action' =>['SliderController@updateSlider',$slider->id] , 'method' => 'POST', 'enctype'=>"multipart/form-data" ]) !!}
                         {{ csrf_field() }}
                             <div class="card-body">
                                 <div class="form-group">
-                                    {{--<label for="exampleInputEmail1">Category name</label>--}}
-                                    {!! Form::label('', 'Category name', ['for' => 'exampleInputEmail1']) !!}
-                                        <select name="parent_id" class="select2 form-control">
-                                            <optgroup label="Select category ">
-                                                @if($categories && $categories -> count() > 0)
-                                                    @foreach($categories as $category)
-                                                        <option value="{{$category -> id }}">{{$category-> category_name}}</option>
-                                                    @endforeach
-                                                @endif
-                                            </optgroup>
-                                    </select>
-                                    {{--<input type="text" name="category_name" class="form-control" id="exampleInputEmail1" placeholder="Enter category">--}}
+                                    {!! Form::label('', 'description 1', ['for' => 'exampleInputEmail1']) !!}
+                                    {!! Form::text('description1', $slider->description1 , ['class' => 'form-control' , 'id' => 'exampleInputEmail1' , 'placeholder' => 'Enter slider description']) !!}
+
                                 </div>
+
                                 <div class="form-group">
-                                    {{--<label for="exampleInputEmail1">Category name</label>--}}
-                                    {!! Form::label('', 'SubCategory name', ['for' => 'exampleInputEmail1']) !!}
-                                    {!! Form::text('category_name', '' , ['class' => 'form-control' , 'id' => 'exampleInputEmail1' , 'placeholder' => 'Enter category']) !!}
-                                    {{--<input type="text" name="category_name" class="form-control" id="exampleInputEmail1" placeholder="Enter category">--}}
+                                    {!! Form::label('', 'description 2', ['for' => 'exampleInputEmail1']) !!}
+                                    {!! Form::text('description2', $slider->description1 , ['class' => 'form-control' , 'id' => 'exampleInputEmail1' , 'placeholder' => 'Enter slider description']) !!}
+
+                                </div>
+
+                                <label for="exampleInputFile">Slider image</label>
+                                <div class="input-group">
+                                    <div class="custom-file">
+                                        {!! Form::file('slider_image',  ['class' => 'custom-file-input' , 'id' => 'exampleInputFile' ]) !!}
+                                        {!! Form::label('', 'Choose file', ['class' => 'custom-file-label' ,'for' => 'exampleInputFile']) !!}
+
+                                    </div>
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">Upload</span>
+                                    </div>
                                 </div>
                             </div>
-                <!-- /.card-body -->
+                            <!-- /.card-body -->
                             <div class="card-footer">
-                <!-- <button type="submit" class="btn btn-primary">Submit</button> -->
-                            {!! Form::submit('Save', ['class'=> 'btn btn-primary']) !!}
-                                {{--<input type="submit" class="btn btn-primary" value="Save" >--}}
+
+                                {!! Form::submit('Update', ['class'=> 'btn btn-warning']) !!}
+
                             </div>
                         {!! Form::close() !!}
-
-                        {{-- </form> --}}
                     </div>
-            <!-- /.card -->
+                    <!-- /.card -->
                 </div>
-            <!--/.col (left) -->
-            <!-- right column -->
+                <!--/.col (left) -->
+                <!-- right column -->
                 <div class="col-md-6">
 
                 </div>
-            <!--/.col (right) -->
+                <!--/.col (right) -->
             </div>
-        <!-- /.row -->
+            <!-- /.row -->
         </div><!-- /.container-fluid -->
     </section>
     <!-- /.content -->
 </div>
 <!-- /.content-wrapper -->
-
-
-
 @endsection
 
-
 @section('scripts')
-
-<!-- jquery-validation -->
+    <!-- jquery-validation -->
 <script src="backend/plugins/jquery-validation/jquery.validate.min.js"></script>
 <script src="backend/plugins/jquery-validation/additional-methods.min.js"></script>
 <!-- AdminLTE App -->
@@ -164,5 +158,4 @@
         });
     });
 </script>
-
 @endsection
