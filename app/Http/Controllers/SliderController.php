@@ -87,8 +87,8 @@ class SliderController extends Controller
             }
 
             $slider ->update([
-                'slider_name' => $request->slider_name,
-                'slider_price' => $request->slider_price,
+                'description1' => $request->description1,
+                'description2' => $request->description1,
 
                 ]);
 
